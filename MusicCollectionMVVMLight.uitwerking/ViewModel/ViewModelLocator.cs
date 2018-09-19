@@ -9,9 +9,9 @@
   DataContext="{Binding Source={StaticResource Locator}, Path=ViewModelName}"
 */
 
+using CommonServiceLocator;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
-using Microsoft.Practices.ServiceLocation;
 using MusicCollectionMVVMMVVMLight.Model;
 
 namespace MusicCollectionMVVMLight.ViewModel
@@ -42,8 +42,9 @@ namespace MusicCollectionMVVMLight.ViewModel
         {
             get
             {
-                //De service locator gebruikt een 'singleton' patroon. 
-                //Het maakt niet uit hoevaak je een SongList aanvraagt, je krijgt altijd het zelfde object terug. 
+                //Je kan natuurlijk ook gewoon zelf een ViewModel aanmaken!
+                //Hier maken we een addsongViewModel.
+                //Deze heeft de List van songs nodig om het aangemaakte liedje aan toe te kunnen voegen. 
                 return new AddSongViewModel(this.SongList);
             }
         }
@@ -53,6 +54,8 @@ namespace MusicCollectionMVVMLight.ViewModel
             get
             {
                 //Hmmm... Wat moeten we hier nu returnen? Denk er maar eens goed over na!
+                //Het antwoord: Een EditSongViewModel. 
+                //Deze heeft het geselecteerde liedje nodig van de SongListViewModel
                 return new EditSongViewModel(SongList.SelectedSong);
             }
         }
